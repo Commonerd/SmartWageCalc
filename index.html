@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="google-site-verification"
+      content="U-GWwZOKUY-FqRJYQu4ealLEaLnFK4WTKgDI7SCbS3E"
+    />
+    <meta
+      name="description"
+      content="SmartWageCalc - Instantly calculate your hourly wage and optimize your income strategy. Designed for freelancers, side hustlers, and gig workers."
+    />
+    <meta
+      name="keywords"
+      content="hourly wage calculator, smart wage calculator, freelance income, side hustle, gig economy, work calculator"
+    />
+    <meta name="author" content="SmartWageCalc Team" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>SmartWageCalc - Hourly Wage Calculator</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #fdfdfd;
+        color: #222;
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 1rem;
+        text-align: center;
+      }
+      input,
+      button {
+        padding: 0.7rem;
+        font-size: 1rem;
+        margin: 0.5rem;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      .result {
+        margin-top: 1rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>SmartWageCalc</h1>
+    <p>Calculate your hourly wage and track your work sessions effortlessly.</p>
+
+    <label>Total Earned ($): <input type="number" id="totalEarned" /></label
+    ><br />
+    <label>Total Hours Worked: <input type="number" id="hoursWorked" /></label
+    ><br />
+    <button onclick="calculateWage()">Calculate</button>
+    <button onclick="saveData()">Save</button>
+
+    <div class="result" id="result"></div>
+    <script>
+      function calculateWage() {
+        const earned = parseFloat(document.getElementById("totalEarned").value);
+        const hours = parseFloat(document.getElementById("hoursWorked").value);
+        if (isNaN(earned) || isNaN(hours) || hours === 0) {
+          document.getElementById("result").textContent =
+            "Please enter valid numbers.";
+          return;
+        }
+        const hourly = (earned / hours).toFixed(2);
+        document.getElementById(
+          "result"
+        ).textContent = `Your hourly wage is $${hourly}`;
+        localStorage.setItem("savedWage", JSON.stringify({ earned, hours }));
+      }
+
+      function saveData() {
+        const earned = document.getElementById("totalEarned").value;
+        const hours = document.getElementById("hoursWorked").value;
+        localStorage.setItem("savedWage", JSON.stringify({ earned, hours }));
+        alert("Data saved to your browser.");
+      }
+
+      window.onload = () => {
+        const saved = localStorage.getItem("savedWage");
+        if (saved) {
+          const { earned, hours } = JSON.parse(saved);
+          document.getElementById("totalEarned").value = earned;
+          document.getElementById("hoursWorked").value = hours;
+        }
+      };
+    </script>
+  </body>
+</html>
