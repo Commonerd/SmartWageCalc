@@ -3,96 +3,140 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="google-site-verification"
-      content="U-GWwZOKUY-FqRJYQu4ealLEaLnFK4WTKgDI7SCbS3E"
-    />
+    <title>SmartWageCalc - Freelance Hourly Rate Calculator</title>
     <meta
       name="description"
-      content="SmartWageCalc - Instantly calculate your hourly wage and optimize your income strategy. Designed for freelancers, side hustlers, and gig workers."
+      content="Calculate your freelance or gig worker hourly wage easily with SmartWageCalc. Optimized for SEO and income growth."
     />
-    <meta
-      name="keywords"
-      content="hourly wage calculator, smart wage calculator, freelance income, side hustle, gig economy, work calculator"
-    />
-    <meta name="author" content="SmartWageCalc Team" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>SmartWageCalc - Hourly Wage Calculator</title>
+    <link rel="icon" href="favicon.png" />
+    <link rel="canonical" href="https://smartwagecalc.netlify.app/" />
     <style>
       body {
-        font-family: "Segoe UI", sans-serif;
-        background: #fdfdfd;
-        color: #222;
-        max-width: 600px;
-        margin: 2rem auto;
-        padding: 1rem;
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+      }
+      .calculator,
+      .blog {
+        margin-top: 40px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #2a2a2a;
+      }
+      footer {
+        margin-top: 50px;
         text-align: center;
-      }
-      input,
-      button {
-        padding: 0.7rem;
-        font-size: 1rem;
-        margin: 0.5rem;
-        border-radius: 6px;
-        border: 1px solid #ccc;
-      }
-      button {
-        background-color: #007bff;
-        color: white;
-        cursor: pointer;
-      }
-      button:hover {
-        background-color: #0056b3;
-      }
-      .result {
-        margin-top: 1rem;
-        font-size: 1.2rem;
-        font-weight: bold;
+        font-size: 0.9em;
+        color: gray;
       }
     </style>
   </head>
   <body>
-    <h1>SmartWageCalc</h1>
-    <p>Calculate your hourly wage and track your work sessions effortlessly.</p>
+    <div class="container">
+      <section class="calculator">
+        <h1>SmartWageCalc</h1>
+        <p>
+          Enter your freelance work details to calculate your ideal hourly rate.
+        </p>
+        <!-- 급여 계산기 UI (여기에 JS 동작) -->
+        <form id="calc-form">
+          <label
+            >Annual income goal:
+            <input type="number" id="income" required /></label
+          ><br /><br />
+          <label
+            >Billable hours per year:
+            <input type="number" id="hours" required /></label
+          ><br /><br />
+          <label
+            >Estimated annual expenses:
+            <input type="number" id="expenses" required /></label
+          ><br /><br />
+          <button type="submit">Calculate</button>
+        </form>
+        <p id="result"></p>
+      </section>
 
-    <label>Total Earned ($): <input type="number" id="totalEarned" /></label
-    ><br />
-    <label>Total Hours Worked: <input type="number" id="hoursWorked" /></label
-    ><br />
-    <button onclick="calculateWage()">Calculate</button>
-    <button onclick="saveData()">Save</button>
+      <section class="blog">
+        <h2>How to Calculate Your Hourly Rate as a Freelancer</h2>
+        <p>
+          Whether you're a designer, developer, or VA, here's how to price your
+          time.
+        </p>
+        <h3>Step 1: Desired Income</h3>
+        <p>
+          Start by choosing a realistic target annual income, e.g., $80,000.
+        </p>
 
-    <div class="result" id="result"></div>
+        <h3>Step 2: Estimate Billable Hours</h3>
+        <p>
+          Account for admin, vacation, sick days. Example: 1,400 billable
+          hours/year.
+        </p>
+
+        <h3>Step 3: Add Expenses & Taxes</h3>
+        <p>Include tools, insurance, taxes. e.g., $20,000/year.</p>
+
+        <h3>Step 4: Use This Formula</h3>
+        <pre>Hourly Rate = (Income + Expenses) / Hours</pre>
+        <p>Result: ($80,000 + $20,000) / 1400 = $71.43/hour</p>
+
+        <h3>FAQs</h3>
+        <ul>
+          <li>
+            <strong>Q:</strong> Should I vary rates by client?<br /><strong
+              >A:</strong
+            >
+            Yes, based on industry and urgency.
+          </li>
+          <li>
+            <strong>Q:</strong> What about fixed projects?<br /><strong
+              >A:</strong
+            >
+            Estimate hours to check profitability.
+          </li>
+        </ul>
+      </section>
+
+      <footer>&copy; 2025 SmartWageCalc. Built for freelancers.</footer>
+    </div>
+
     <script>
-      function calculateWage() {
-        const earned = parseFloat(document.getElementById("totalEarned").value);
-        const hours = parseFloat(document.getElementById("hoursWorked").value);
-        if (isNaN(earned) || isNaN(hours) || hours === 0) {
-          document.getElementById("result").textContent =
-            "Please enter valid numbers.";
-          return;
-        }
-        const hourly = (earned / hours).toFixed(2);
-        document.getElementById(
-          "result"
-        ).textContent = `Your hourly wage is $${hourly}`;
-        localStorage.setItem("savedWage", JSON.stringify({ earned, hours }));
-      }
+      const form = document.getElementById("calc-form");
+      const result = document.getElementById("result");
 
-      function saveData() {
-        const earned = document.getElementById("totalEarned").value;
-        const hours = document.getElementById("hoursWorked").value;
-        localStorage.setItem("savedWage", JSON.stringify({ earned, hours }));
-        alert("Data saved to your browser.");
-      }
-
+      // LocalStorage Load
       window.onload = () => {
-        const saved = localStorage.getItem("savedWage");
-        if (saved) {
-          const { earned, hours } = JSON.parse(saved);
-          document.getElementById("totalEarned").value = earned;
-          document.getElementById("hoursWorked").value = hours;
+        if (localStorage.getItem("income")) {
+          document.getElementById("income").value =
+            localStorage.getItem("income");
+          document.getElementById("hours").value =
+            localStorage.getItem("hours");
+          document.getElementById("expenses").value =
+            localStorage.getItem("expenses");
         }
+      };
+
+      form.onsubmit = (e) => {
+        e.preventDefault();
+        const income = parseFloat(document.getElementById("income").value);
+        const hours = parseFloat(document.getElementById("hours").value);
+        const expenses = parseFloat(document.getElementById("expenses").value);
+        const hourlyRate = ((income + expenses) / hours).toFixed(2);
+        result.innerHTML = `Your ideal hourly rate is <strong>$${hourlyRate}</strong>`;
+
+        // LocalStorage Save
+        localStorage.setItem("income", income);
+        localStorage.setItem("hours", hours);
+        localStorage.setItem("expenses", expenses);
       };
     </script>
   </body>
