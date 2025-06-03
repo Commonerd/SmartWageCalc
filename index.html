@@ -3,126 +3,165 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SmartWageCalc - Freelance Hourly Rate Calculator</title>
+    <title>SmartWageCalc – Freelance Hourly Rate Calculator</title>
     <meta
       name="description"
-      content="Calculate your freelance or gig worker hourly wage easily with SmartWageCalc. Optimized for SEO and income growth."
+      content="SmartWageCalc helps freelancers calculate their ideal hourly wage. Find out how much to charge based on your goals."
     />
-    <link rel="icon" href="favicon.png" />
     <link rel="canonical" href="https://smartwagecalc.netlify.app/" />
+    <link rel="icon" href="favicon.png" />
+
     <style>
+      :root {
+        --primary: #3b82f6;
+        --gray: #f9fafb;
+        --dark: #1f2937;
+      }
       body {
-        font-family: sans-serif;
         margin: 0;
-        padding: 0;
-        line-height: 1.6;
+        font-family: "Segoe UI", sans-serif;
+        background: var(--gray);
+        color: var(--dark);
+      }
+      header {
+        background: white;
+        padding: 2rem 1rem;
+        text-align: center;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      header h1 {
+        font-size: 2rem;
+        margin: 0;
+        color: var(--primary);
       }
       .container {
-        max-width: 800px;
-        margin: auto;
-        padding: 20px;
+        max-width: 720px;
+        margin: 2rem auto;
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
       }
-      .calculator,
-      .blog {
-        margin-top: 40px;
+      form input,
+      form button {
+        width: 100%;
+        padding: 0.75rem;
+        margin-top: 0.5rem;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 1rem;
       }
-      h1,
-      h2,
-      h3 {
-        color: #2a2a2a;
+      form button {
+        background: var(--primary);
+        color: white;
+        border: none;
+        margin-top: 1rem;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      form button:hover {
+        background: #2563eb;
+      }
+      #result {
+        margin-top: 1.5rem;
+        font-size: 1.25rem;
+        font-weight: bold;
+      }
+      section.blog {
+        margin-top: 3rem;
+      }
+      section.blog h2 {
+        color: var(--primary);
+        margin-top: 2rem;
+      }
+      section.blog p,
+      section.blog li {
+        margin-bottom: 1rem;
+        line-height: 1.6;
       }
       footer {
-        margin-top: 50px;
         text-align: center;
-        font-size: 0.9em;
-        color: gray;
+        margin: 3rem 0;
+        color: #6b7280;
+        font-size: 0.9rem;
       }
     </style>
   </head>
+
   <body>
+    <header>
+      <h1>SmartWageCalc</h1>
+      <p>Your Freelance Hourly Rate Calculator</p>
+    </header>
+
     <div class="container">
-      <section class="calculator">
-        <h1>SmartWageCalc</h1>
-        <p>
-          Enter your freelance work details to calculate your ideal hourly rate.
-        </p>
-        <!-- 급여 계산기 UI (여기에 JS 동작) -->
-        <form id="calc-form">
-          <label
-            >Annual income goal:
-            <input type="number" id="income" required /></label
-          ><br /><br />
-          <label
-            >Billable hours per year:
-            <input type="number" id="hours" required /></label
-          ><br /><br />
-          <label
-            >Estimated annual expenses:
-            <input type="number" id="expenses" required /></label
-          ><br /><br />
-          <button type="submit">Calculate</button>
-        </form>
-        <p id="result"></p>
-      </section>
+      <form id="calc-form">
+        <label>💼 Annual Income Goal ($)</label>
+        <input type="number" id="income" placeholder="e.g. 80000" required />
+
+        <label>⏳ Billable Hours Per Year</label>
+        <input type="number" id="hours" placeholder="e.g. 1400" required />
+
+        <label>💸 Annual Expenses ($)</label>
+        <input type="number" id="expenses" placeholder="e.g. 20000" required />
+
+        <button type="submit">🔍 Calculate My Hourly Rate</button>
+      </form>
+
+      <p id="result"></p>
 
       <section class="blog">
-        <h2>How to Calculate Your Hourly Rate as a Freelancer</h2>
+        <h2>How to Set the Right Hourly Rate as a Freelancer</h2>
         <p>
-          Whether you're a designer, developer, or VA, here's how to price your
-          time.
-        </p>
-        <h3>Step 1: Desired Income</h3>
-        <p>
-          Start by choosing a realistic target annual income, e.g., $80,000.
+          Setting your freelance rate isn’t guesswork. It's about your income,
+          hours, and expenses.
         </p>
 
-        <h3>Step 2: Estimate Billable Hours</h3>
+        <h3>📌 Step 1: Your Target Income</h3>
+        <p>Begin with how much you want to earn annually. Let’s say $80,000.</p>
+
+        <h3>📌 Step 2: Estimate Billable Hours</h3>
         <p>
-          Account for admin, vacation, sick days. Example: 1,400 billable
-          hours/year.
+          Factor in vacations, admin time, and breaks. Many freelancers only
+          bill ~1400 hours/year.
         </p>
 
-        <h3>Step 3: Add Expenses & Taxes</h3>
-        <p>Include tools, insurance, taxes. e.g., $20,000/year.</p>
+        <h3>📌 Step 3: Add Expenses</h3>
+        <p>Tools, taxes, workspace rent. Suppose it's $20,000/year.</p>
 
-        <h3>Step 4: Use This Formula</h3>
+        <h3>📌 Final Formula:</h3>
         <pre>Hourly Rate = (Income + Expenses) / Hours</pre>
-        <p>Result: ($80,000 + $20,000) / 1400 = $71.43/hour</p>
+        <p>
+          In our example: ($80,000 + $20,000) / 1400 =
+          <strong>$71.43/hour</strong>
+        </p>
 
-        <h3>FAQs</h3>
+        <h3>💡 FAQs</h3>
         <ul>
           <li>
-            <strong>Q:</strong> Should I vary rates by client?<br /><strong
-              >A:</strong
-            >
-            Yes, based on industry and urgency.
+            <strong>Should I charge more for urgent work?</strong> – Yes. Add
+            urgency premiums.
           </li>
           <li>
-            <strong>Q:</strong> What about fixed projects?<br /><strong
-              >A:</strong
-            >
-            Estimate hours to check profitability.
+            <strong>Should I round up?</strong> – Always. Use round,
+            psychologically pleasant numbers.
           </li>
         </ul>
       </section>
-
-      <footer>&copy; 2025 SmartWageCalc. Built for freelancers.</footer>
     </div>
+
+    <footer>&copy; 2025 SmartWageCalc – Built for freelancers.</footer>
 
     <script>
       const form = document.getElementById("calc-form");
       const result = document.getElementById("result");
 
-      // LocalStorage Load
       window.onload = () => {
-        if (localStorage.getItem("income")) {
-          document.getElementById("income").value =
-            localStorage.getItem("income");
-          document.getElementById("hours").value =
-            localStorage.getItem("hours");
-          document.getElementById("expenses").value =
-            localStorage.getItem("expenses");
-        }
+        ["income", "hours", "expenses"].forEach((id) => {
+          if (localStorage.getItem(id)) {
+            document.getElementById(id).value = localStorage.getItem(id);
+          }
+        });
       };
 
       form.onsubmit = (e) => {
@@ -130,10 +169,14 @@
         const income = parseFloat(document.getElementById("income").value);
         const hours = parseFloat(document.getElementById("hours").value);
         const expenses = parseFloat(document.getElementById("expenses").value);
+        if (hours === 0) {
+          result.innerHTML = "Billable hours must be greater than 0.";
+          return;
+        }
         const hourlyRate = ((income + expenses) / hours).toFixed(2);
-        result.innerHTML = `Your ideal hourly rate is <strong>$${hourlyRate}</strong>`;
+        result.innerHTML = `✅ Your ideal hourly rate is <strong>$${hourlyRate}</strong>`;
 
-        // LocalStorage Save
+        // Save inputs
         localStorage.setItem("income", income);
         localStorage.setItem("hours", hours);
         localStorage.setItem("expenses", expenses);
